@@ -1,0 +1,38 @@
+{
+  "name": "generator-yo-template",
+  "description": "generator-yo-template for vant antd element eapp",
+  "version": "0.0.2",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maogugu/generator-yo-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maogugu/generator-yo-template/issues"
+  },
+  "homepage": "https://github.com/maogugu/generator-yo-template#readme",
+  "author": "gugu",
+  "license": "ISC",
+  "dependencies": {
+    "argsplit": "^1.0.5",
+    "chalk": "^4.1.0",
+    "co": "^4.6.0",
+    "del": "^2.2.0",
+    "execa": "^4.0.2",
+    "fs": "0.0.1-security",
+    "fs-extra": "^9.0.1",
+    "git-remote-origin-url": "^3.1.0",
+    "handlebars": "^4.7.6",
+    "is-git-repository": "^1.1.1",
+    "jscodeshift": "^0.10.0",
+    "lodash.topairs": "^4.3.0",
+    "log-symbols": "^4.0.0",
+    "shelljs": "^0.8.4",
+    "urllib": "^2.36.1",
+    "yeoman-environment": "^2.10.3",
+    "yeoman-generator": "^0.23.4",
+    "yosay": "^2.0.2"
+  }
+}

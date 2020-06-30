@@ -1,0 +1,4 @@
+<view class="page-index">
+  <button type="primary" catchTap="test">接口test</button>
+  <logo />
+</view>

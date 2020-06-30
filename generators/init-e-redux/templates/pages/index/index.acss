@@ -1,0 +1,28 @@
+.page-index{
+  padding: 32rpx;
+}
+
+.text-api-box, .docs-recommend{
+  margin-top: 32rpx;
+  width: 686rpx;
+}
+
+.text-api-box >text{
+  display: block;
+  text-indent: 2em;
+  line-height: 44rpx;
+  margin-top: 8rpx;
+}
+
+.text-api-box >text{
+  display: block;
+  text-indent: 2em;
+  line-height: 44rpx;
+  margin-top: 8rpx;
+}
+
+.docs-recommend >text{
+  display: block;
+  line-height: 44rpx;
+  margin-top: 8rpx;
+}

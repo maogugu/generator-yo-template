@@ -1,0 +1,14 @@
+module EduAlbum;
+
+struct QueryAgreementRequest {
+  1: string classId;
+  2: string corpId;
+}
+
+interface LwpFaceFacadeIService {
+
+  /**
+    * 获取相册标记功能开关
+    */
+    ILwpFaceFacadeModel queryAgreement(QueryAgreementRequest request);
+}

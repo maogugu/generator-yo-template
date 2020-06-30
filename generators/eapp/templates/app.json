@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "pages/demo/index"
+  ],
+  "window": {
+    "defaultTitle": "template",
+    "backgroundColor": "#ffffff"
+  }
+}

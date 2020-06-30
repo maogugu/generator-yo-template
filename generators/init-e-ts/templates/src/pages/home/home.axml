@@ -1,0 +1,10 @@
+<view class="page-index">
+  <view class="title">Hello World!</view>
+  <view class="content">i18nText: {{i18nText.h5_dingtalk_name}}</view>
+  <dingui-button
+    type="primary"
+    size="small"
+    onDmTap="sendRequest">
+    lwp
+  </dingui-button>
+</view>

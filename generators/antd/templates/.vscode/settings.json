@@ -1,0 +1,58 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules": true,
+    "dist": true,
+  },
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[sass]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "easysass.compileAfterSave": false, // 关闭自动编译
+  "easysass.formats": [{
+    "format": "compressed",
+    "extension": ".min.css"
+  }],
+  "editor.codeActionsOnSave": { // eslint 自动修复
+    "source.fixAll.eslint": true
+  },
+  "vetur.validation.template": true,
+  "vetur.validation.script": false,
+  "emmet.triggerExpansionOnTab": true,
+  // 配置css 代码提示 减少内存使用 提示 src snippets public 三个目录下 所有 css less 文件
+  "html-css-class-completion.includeGlobPattern": "{src,snippets,public}/**/*.{css,less}",
+  // 不提示 antd.min.css
+  "html-css-class-completion.excludeGlobPattern": "public/css/antd.min.css",
+  "html-css-class-completion.enableEmmetSupport": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "quickrequire.aliasPath": { // 快速引入 支持alias
+    "@/": "src"
+  },
+}

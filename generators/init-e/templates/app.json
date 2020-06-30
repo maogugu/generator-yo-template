@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/home/home"
+  ],
+  "tabBar": {
+    "textColor": "#dddddd",
+    "selectedColor": "#49a9ee",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/home/home",
+        "name": "Home"
+      }
+    ]
+  },
+  "window": {
+    "defaultTitle": "<%=name%>",
+    "needPadScale": true,
+    "responsive": false
+  }
+}

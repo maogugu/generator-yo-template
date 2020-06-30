@@ -1,0 +1,22 @@
+node_modules
+node_modules/
+
+# Users Environment Variables
+.lock-wscript
+
+.package/
+.tmp/
+/dist/
+*.DS_Store
+.DS_Store
+.tea
+
+*.map
+.map
+
+.idea
+
+npm-debug.log
+
+npm-debug.log.*
+yarn-error.log

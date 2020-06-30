@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dingtalk-jsapi": "^2.8.33"
+  },
+  "devDependencies": {
+    "standard": "^14.3.3"
+  }
+}

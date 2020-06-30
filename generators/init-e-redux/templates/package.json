@@ -1,0 +1,50 @@
+{
+  "name": "<%=name%>",
+  "version": "0.0.1",
+  "description": "<%=description%>",
+  "main": "app.js",
+  "scripts": {
+    "update-18n": "update-i18n ./services/translationKeys.js ./i18nResource -n <%=medusaId%>",
+    "test-init": "tnpm i -g @ali/dtest-toolbox",
+    "test-server": "dtest tiny server config1",
+		"test-eapp": "jest",
+		"test-prepush": "dtest unit-test -R"
+  },
+  "repository": {
+    "type": "git",
+    "url": "<%=gitUrl%>"
+  },
+  "keywords": [
+    "dingTalk",
+    "eapp"
+  ],
+  "devDependencies": {
+    "@ali/dtest-eapp": "latest",
+    "@ali/dtest-toolbox": "latest",
+    "@ali/e-scripts": "^1.0.4",
+    "jest": "^24.8.0",
+    "babel-jest": "^24.9.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "pre-push": "^0.1.1"
+  },
+  "dependencies": {
+    "@ali/ding-mediaid": "^1.3.1",
+    "@ali/dingtalk-i18n": "^6.0.0",
+    "@ali/dingtalk-jsapi": "^2.6.6",
+    "@ali/dingtalk-medusa": "^8.0.3",
+    "@ali/retcodelog": "^0.3.0",
+    "@ali/mini-ddui": "^0.5.0",
+    "dva-core": "^1.4.0",
+    "@ali/eapp-redux": "^0.1.13"
+  },
+  "tnpm": {
+    "mode": "yarn",
+    "lockfile": "enable"
+  },
+  "pre-push": [ "test-prepush" ],
+  "author": {
+    "name": "<%-author%>"
+  },
+  "license": "ISC"
+}

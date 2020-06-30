@@ -1,0 +1,39 @@
+/*
+ * iconFontE应用解决方案：https://yuque.antfin-inc.com/docs/share/17228c5d-332e-44f2-8693-961fc4131e5a
+*/
+
+/* 更新线上字体文件仅更换@font-face即可 */
+@font-face {
+  font-family: 'iconfont';  /* project id 1494823 */
+  src: url('//at.alicdn.com/t/font_1494823_sy5evpjnuxn.eot');
+  src: url('//at.alicdn.com/t/font_1494823_sy5evpjnuxn.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1494823_sy5evpjnuxn.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1494823_sy5evpjnuxn.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1494823_sy5evpjnuxn.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1494823_sy5evpjnuxn.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 请手工输入新增的 iconfont class content内容可在网页查看*/
+.icon-zerenren:before {content: "\e6c3";}
+.icon-xiangyou:before{content: "\e6c2";}
+.icon-wenjianmingcheng:before{content: "\e6c1";}
+.icon-jiahao:before{content: "\e6c0";}
+.icon-guanlianbianhao:before{content: "\e6bf";}
+.icon-wenjianfenlei:before{content: "\e6be";}
+.icon-shanchu:before{content: "\e6bd";}
+.icon-zhaoxia:before{content: "\e6bc";}
+.icon-fujian:before{content: "\e6bb";}
+.icon-shijian:before{content: "\e6ba";}
+.icon-fakuanjine:before{content: "\e6c7";}
+.icon-saoma:before{content: "\e6c8";}
+.icon-dagou:before{content: "\e6c9";}
+.icon-chaosongren:before{content: "\e6c5";}
+.icon-xiangxiajiantou:before{content: "\e6cb";}

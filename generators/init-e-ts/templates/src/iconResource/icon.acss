@@ -1,0 +1,5 @@
+/* 改成你自己的iconfont项目资源，执行update-icon将会自动跟新icon.js，更新的icon配合dingui-mini的icon组件使用 */
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1785827_68nh82wu0ju.ttf');
+}

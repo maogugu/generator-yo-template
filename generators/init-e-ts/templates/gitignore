@@ -1,0 +1,19 @@
+node_modules/
+test-coverage
+.testFiles
+
+# 编译后的目录
+/dist/
+
+# 小程序 ide 文件
+.tea
+
+#
+.DS_Store
+
+npm-debug.log
+yarn.error
+yarn-error.log
+
+tree.md
+.vscode

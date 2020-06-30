@@ -1,0 +1,12 @@
+<view class="page-index">
+  This is a blank page for Eapp
+  <view class="text-api-box">
+    Those words below are from ajax api:
+    <text>{{content}}</text>
+  </view>
+  <view class="docs-recommend">
+    Those docs below are for you to refer:
+    <text>https://www.atatech.org/articles/126472#5</text>
+    <text>https://open-doc.dingtalk.com/microapp/dev/ed25rr</text>
+  </view>
+</view>

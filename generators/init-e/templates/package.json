@@ -1,0 +1,56 @@
+{
+  "name": "<%=name%>",
+  "version": "0.0.1",
+  "description": "<%=description%>",
+  "main": "app.js",
+  "scripts": {
+    <% if (less && medusaId) { %>"start": "gulp watch",<% } %>
+    <% if (less && !medusaId) { %>"start": "gulp watch",<% } %>
+    <% if (medusaId) { %>"update-18n": "update-i18n ./services/translationKeys.js ./i18nResource -n <%=medusaId%>",<% } %>
+    "test-init": "tnpm i -g @ali/dtest-toolbox",
+    "test-server": "dtest tiny server config1",
+		"test-eapp": "jest",
+		"test-prepush": "dtest unit-test -R"
+  },
+  "repository": {
+    "type": "git",
+    "url": "<%=gitUrl%>"
+  },
+  "keywords": [
+    "dingTalk",
+    "eapp"
+  ],
+  "devDependencies": {
+    "@ali/dingtalk-aone-hook": "^0.0.8",
+    <% if (less) { %>"gulp": "^3.9.1",
+    "gulp-cli": "2.1.0",
+    "@ali/dingui-style-common": "^1.2.1",
+    "gulp-less": "^4.0.1",
+    "gulp-remove-empty-lines": "^0.1.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-strip-css-comments": "^2.0.0",<%} %>
+    "@ali/dtest-eapp": "latest",
+    "@ali/dtest-toolbox": "latest",
+    "jest": "^24.8.0",
+    "babel-jest": "^24.9.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "pre-push": "^0.1.1"
+  },
+  "dependencies": {
+    <% if (medusaId) { %>"@ali/dingtalk-i18n": "^6.0.0",
+    "@ali/dingtalk-medusa": "^8.0.3",<% } %>
+    "@ali/dingtalk-jsapi": "^2.11.1",
+    "@ali/retcodelog": "^0.3.0",
+    "@ali/dingui-mini": "^2.0.0"
+  },
+  "tnpm": {
+    "mode": "yarn",
+    "lockfile": "enable"
+  },
+  "pre-push": [ "test-prepush" ],
+  "author": {
+    "name": "<%-author%>"
+  },
+  "private": true
+}

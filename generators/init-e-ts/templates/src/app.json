@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/home/home"
+  ],
+  "window": {
+    "defaultTitle": "init-e-ts",
+    "backgroundColor": "#F5F5F9",
+    "pullRefresh": false,
+    "allowsBounceVertical": true,
+    "needPadScale": true,
+    "responsive": false
+  }
+}

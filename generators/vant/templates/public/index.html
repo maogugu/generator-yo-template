@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>项目名</title>
+  <link rel="dns-prefetch" href="xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <style>
+    /** 首屏 loading start */
+    #loading-init { position: absolute; left: 50%; top: 50%; transform: rotate(45deg) translate(-50%, -50%) } #loading-init>li { list-style-type: none; position: absolute; top: 0px; left: 0px; width: 20px; height: 20px; background: #f5d4a1; border-radius: 50% } #a { animation: a 1s ease-in-out infinite; top: -40px; left: -40px } #b { animation: b 1s ease-in-out infinite; top: -40px; left: 0px } #c { animation: c 1s ease-in-out infinite; top: -40px; left: 40px } #d { animation: d 1s ease-in-out infinite; top: 0px; left: -40px } #e { animation: e 1s ease-in-out infinite; top: 0px; left: 0px } #f { animation: f 1s ease-in-out infinite; top: 0px; left: 40px } #g { animation: g 1s ease-in-out infinite; top: 40px; left: -40px } #h { animation: h 1s ease-in-out infinite; top: 40px; left: 0px } #i { animation: i 1s ease-in-out infinite; top: 40px; left: 40px } @keyframes a { 50% { top: 0px; left: -40px } 100% { top: 0px; left: -40px } } @keyframes b { 50% { top: -40px; left: -40px } 100% { top: -40px; left: -40px } } @keyframes c { 50% { top: -40px; left: 0px } 100% { top: -40px; left: 0px } } @keyframes d { 50% { top: 40px; left: -40px } 100% { top: 40px; left: -40px } } @keyframes f { 50% { top: -40px; left: 40px } 100% { top: -40px; left: 40px } } @keyframes g { 50% { top: 40px; left: 0px } 100% { top: 40px; left: 0px } } @keyframes h { 50% { top: 40px; left: 40px } 100% { top: 40px; left: 40px } } @keyframes i { 50% { top: 0px; left: 40px } 100% { top: 0px; left: 40px } }
+    /** 首屏 loading end */
+  </style>
+  <script>
+    var globalLog = console.log;
+    var globalWarn = console.warn;
+    var globalError = console.error;
+    var IsDingBrowser = /dingtalk/.test(navigator.userAgent.toLowerCase())
+  </script>
+  <% for (let link of htmlWebpackPlugin.options.cdn.css) { %>
+  <link rel="stylesheet" href="<%= link %>"><% } %>
+  <% if (process.env.NODE_ENV === 'production') { %>
+  <% for (let src of htmlWebpackPlugin.options.cdn.js) { %><script src="<%= src %>"></script><% } %>
+  <% } %>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1626394_o47rprzondf.css" />
+</head>
+
+<body>
+  <ul id="loading-init">
+    <li id="a"></li>
+    <li id="b"></li>
+    <li id="c"></li>
+    <li id="d"></li>
+    <li id="e"></li>
+    <li id="f"></li>
+    <li id="g"></li>
+    <li id="h"></li>
+    <li id="i"></li>
+  </ul>
+  <div id="app"></div>
+</body>
+
+</html>

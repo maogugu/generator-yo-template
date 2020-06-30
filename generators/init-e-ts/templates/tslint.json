@@ -1,0 +1,23 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "quotemark": [true, "single", "jsx-double"],
+        "no-unused-variable": [true, {
+            "ignore-pattern": "^React$"
+        }],
+        "no-namespace": false,
+        "no-bitwise": false,
+        "no-console": {
+            "severity": "warning"
+        },
+        "interface-name": [false, "never-prefix"]
+    },
+    "linterOptions": {
+        "exclude": [
+            "src/services/dingtalkRpc/**/*",
+            "src/services/dingtalkRpc/*"
+        ]
+    }
+}

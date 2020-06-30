@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "小程序TS模板",
+  "usingComponents": {
+    "dingui-button": "@ali/dingui-mini/es/button/src/index"
+  }
+}

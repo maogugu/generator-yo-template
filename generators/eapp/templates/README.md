@@ -1,5 +1,23 @@
 # 小程序模板
 
+## 运行依赖(通过小程序编译器添加)
+- dingtalk-jsapi 小程序js依赖
+
+## 开发依赖
+| Project | Status | Description |
+|---------|--------|-------------|
+| [css-generator-plugin] | [![css-generator-plugin-status]][css-generator-plugin-package] | 启动项目时启动该依赖生成class文件，npm run dev |
+| [standard] | [![standard-status]][standard-package] | JavaScript 代码规范，自带 linter & 代码自动修正 |
+
+[css-generator-plugin]: https://github.com/macheteHot/css-generator-plugin
+[standard]: https://github.com/standard/standard/blob/master/docs/README-zhcn.md
+
+[css-generator-plugin-status]: https://img.shields.io/badge/css--generator--plugin-0.14.0-blue
+[standard-status]: https://img.shields.io/badge/standard-14.3.4-blue
+
+[css-generator-plugin-package]: https://www.npmjs.com/package/css-generator-plugin
+[standard-package]: https://www.npmjs.com/package/standard
+
 ## 目录介绍
 
   ```
@@ -25,6 +43,7 @@
   │   └── mockData.js                   # 模拟数据
   │   └── tool.js                       # 所有公用方法的统一管理
   ├── app.acss                          # 全局样式
+  ├── css.generator.config.js           # css-generator-plugin 开发工具配置
   ├── app.js                            # 小程序启动入口
   ├── app.json                          # 小程序全局配置，如底部，顶部
   ├── package.json                      # 依赖配置

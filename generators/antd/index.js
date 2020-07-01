@@ -13,7 +13,7 @@ const {
 
 
 module.exports = generators.Base.extend({
-  constructor:function(args, opts) {
+  constructor(args, opts) {
     // super(args, opts);
     generators.Base.apply(this, arguments);
     // this.newDir = false;
@@ -93,8 +93,6 @@ module.exports = generators.Base.extend({
     const temps = {};
     fs.readdir(this.sourceRoot(), (err, items) => {
       for(let item of items) {
-        console.log(item)
-        console.log(temps[item])
           if(temps[item]) {
               this.fs.copyTpl(
                   this.templatePath(item),

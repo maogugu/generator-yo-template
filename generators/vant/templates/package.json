@@ -39,6 +39,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
+    "import-assets-from-cdn": "^0.0.2",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.5.0",

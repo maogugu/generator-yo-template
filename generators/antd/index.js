@@ -80,14 +80,14 @@ module.exports = generators.Base.extend({
     // this.gitRepo = addtionalAnswers.gitRepo;
   },
 
-  // async configuring() {
-  //   this._createEmptyDirs();
-  //   this._gitInit();
-  //   this._createApp();
-  //   this._createPackageJson();
-  //   this._createConfigs();
-  //   this._createReadme();
-  // },
+  async configuring() {
+    // this._createEmptyDirs();
+    this._gitInit();
+    // this._createApp();
+    // this._createPackageJson();
+    // this._createConfigs();
+    // this._createReadme();
+  },
 
   writing() {
     const temps = {};
@@ -123,7 +123,7 @@ module.exports = generators.Base.extend({
   // },
 
   async end() {
-    // await this._gitCommit();
+    await this._gitCommit();
     if(this.newDir){
       shell.cd("..");
     }
@@ -152,7 +152,7 @@ module.exports = generators.Base.extend({
     }
     this.spawnCommandSync(...add())
     this.spawnCommandSync(
-      ...commit({ message: 'Init project with generator-y' })
+      ...commit({ message: 'Init project with generator-yo-template' })
     )
 
     const gitRepo = this.gitRepo;

@@ -3,6 +3,7 @@ const CssGeneratorPlugin = require('css-generator-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const PUBLIC_PATH = process.env.VUE_APP_PUBLIC_PATH
 const LogInfo = require('log-info-webpack-plugin')
+const importAssetsFromCdn = require('import-assets-from-cdn')
 const { version } = require('./package.json')
 const gloableColors = require('./src/style/gloableColors.json')
 function resolve (dir) {
@@ -58,11 +59,8 @@ module.exports = {
   // auto fix eslint
   chainWebpack: config => {
     config
-      .plugin('html') // 注入环境变量
-      .tap(args => {
-        args[0].cdn = cdn
-        return args
-      })
+      .plugin('importAssetsFromCdn')
+      .use(importAssetsFromCdn, [cdn])
       .end()
       .plugin('LogInfo')
       .use(LogInfo, [{

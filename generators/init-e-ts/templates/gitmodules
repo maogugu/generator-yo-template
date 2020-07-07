@@ -1,3 +1,0 @@
-[submodule "imsdk_android"]
-	path = imsdk_android
-	url = git@gitlab.alibaba-inc.com:openim/imsdk_android.git

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { session } from '@/utils'
-import { ErrorMessage } from '@/utils/vantUtils'
+import { ErrorMessage } from '@/utils/antdvUtils'
+import jsFileDownload from 'js-file-download'
 import router from '@/router'
 
 import Qs from 'qs'
@@ -14,22 +15,17 @@ const ERROR_MSG = {
   403: '拒绝访问(403)',
   404: '请求出错(404)',
   408: '请求超时(408)',
+  429: '系统繁忙，请稍后重试(429)',
   502: '网络错误(502)',
   503: '服务不可用(503)',
-  504: '网络超时(504)'
+  504: '网络超时(504)',
+  unKnow: '未知错误！'
 }
 
 const http = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? '' : `${window.location.origin}`
   // timeout: 5000 不超时
 })
-
-function reLogin () {
-  session.destroy('token')
-  const { hash, name, path, params, query } = window.vue.$route
-  session.setSession('backRoute', { hash, name, path, params, query })
-  router.push({ name: 'login' })
-}
 
 http.interceptors.request.use(
   config => {
@@ -55,7 +51,8 @@ http.interceptors.response.use(
         case 403:
         case 405:
         case '-3':
-          reLogin()
+          session.destroy('token')
+          router.push({ name: 'login', query: { from: window.this.$route.name, params: window.this.$route.query } })
           break
         default:
           break
@@ -67,7 +64,8 @@ http.interceptors.response.use(
   error => {
     // http error
     globalError(new Date(), 'err' + error) // for debug reject
-    ErrorMessage(ERROR_MSG[error?.response?.status] || `连接出错(${error.response.status})!`) // 消抖
+    const status = error.response.status
+    ErrorMessage(status ? ERROR_MSG[status] ?? `连接出错(${status})!` : '未知错误!')
     throw new Error(JSON.stringify(error))
   }
 )
@@ -159,6 +157,30 @@ export const put = url => {
           resolve(res)
         })
         .catch(reject)
+    })
+  }
+}
+
+// download 是一个同步函数 不需要async await
+export const download = url => {
+  /**
+   * 要传递的对象, 下载的文件名
+   */
+  return (params = {}, name) => {
+    // 下载不过拦截器
+    axios(
+      {
+        url,
+        method: 'GET',
+        params: JSONClone(params),
+        paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }),
+        responseType: 'blob',
+        headers: {
+          token: session.getSession('token').replace(/"/g, '')
+        }
+      }
+    ).then(res => {
+      jsFileDownload(res.data, name)
     })
   }
 }

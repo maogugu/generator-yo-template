@@ -1,12 +1,10 @@
 <template>
   <a-layout class="h-100vh">
     <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-      <div class="logo bg-white m-16 h-32">
+      <div class="logo bg-red m-16 h-32">
         <p class="lh-32 text-center text-red-45 fs-24">此处是logo</p>
       </div>
-      <a-menu theme="dark" mode="inline">
-        <sider-menu />
-      </a-menu>
+      <sider-menu />
     </a-layout-sider>
     <a-layout>
       <a-layout-header class="bg-white p-0">
@@ -17,8 +15,8 @@
         />
       </a-layout-header>
       <a-layout-content>
-        <a-layout class="m-24 bg-white">
-          <router-view />
+        <a-layout >
+          <router-view class="m-24 bg-white" />
         </a-layout>
       </a-layout-content>
     </a-layout>

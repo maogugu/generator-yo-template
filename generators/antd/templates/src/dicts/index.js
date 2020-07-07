@@ -1,9 +1,9 @@
 /**
  * 字典
  * @example
- * dict.getDictList('user')  // 字典名
- * dict.getDictObj('user')  // 字典名
- * dict.getDictItem('user',2))  // 字典名, key
+ * dict.getDictList('user')  // 根据字典名，获取list(多用于下拉框)，如[{key:1,name:'内置类型1'},{key:2,name:'内置类型2'}]
+ * dict.getDictObj('user')  // 根据字典名，获取对象，如{ 1: '内置类型1', 2: '内置类型2' }
+ * dict.getDictItem('user',2))  // 根据字典名和key，获取value
 */
 const requireDictFiles = require.context('./', true, /\.js/)
 // 如果数据少,可写在对象内  数据多请新建文件

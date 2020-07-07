@@ -82,7 +82,7 @@ module.exports = generators.Base.extend({
 
   async configuring() {
     // this._createEmptyDirs();
-    this._gitInit();
+    // this._gitInit();
     // this._createApp();
     // this._createPackageJson();
     // this._createConfigs();
@@ -123,7 +123,7 @@ module.exports = generators.Base.extend({
   // },
 
   async end() {
-    await this._gitCommit();
+    // await this._gitCommit();
     if(this.newDir){
       shell.cd("..");
     }

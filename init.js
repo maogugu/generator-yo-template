@@ -53,10 +53,8 @@ async function run(){
   const yo_env = yeoman.createEnv()
   console.log('安装初始化脚本依赖完成')
   console.log('安装项目模板')
-  shelljs.rm('-rf','*')
-  shelljs.rm('-rf','.*')
   yo_env.register(`generator-yo-template/generators/${type}/index.js`, name)
-  yo_env.run(`${name}`, {}, function (err) {
+  yo_env.run(`${name} --force`, {}, function (err) {
     try {
       console.log('安装项目模板完成')
       shelljs.rm('-rf','init.js')

@@ -75,11 +75,12 @@ async function run(){
 
 
 function install () {
-  if(argv.a){
+  if(argv.a !== no){
     console.log('开始自动安装项目依赖')
-    const pkg = path.join(__dirname, 'package.json')
-    if (fs.existsSync(pkg)) {
-      execSync('npm install', { stdio: 'inherit' })
+    if(tool === 'yarn'){
+      execSync('yarn')
+    }else{
+      execSync(`${tool} install`)
     }
   }
 }

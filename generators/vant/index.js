@@ -1,6 +1,6 @@
 'use strict';
 const generators = require('yeoman-generator');
-const logSymbols = require('../eapp/node_modules/log-symbols');
+const logSymbols = require('log-symbols');
 const chalk = require('chalk');
 const fs = require('fs');
 const yosay = require('yosay');

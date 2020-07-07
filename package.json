@@ -1,7 +1,7 @@
 {
   "name": "generator-yo-template",
   "description": "generator-yo-template for vant antd element eapp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "keywords": [
     "yeoman-generator"
   ],

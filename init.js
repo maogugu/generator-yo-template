@@ -13,7 +13,7 @@ execSync('npm install inquirer optimist')
 const argv = require('optimist').argv;
 const inquirer = require('inquirer')
 const name = 'generator'
-const types = ['antd','element','eapp']
+const types = ['antd','element','eapp','vant']
 const tools = ['npm','cnpm','yarn']
 let tool = ''
 async function chooseType(){
@@ -39,6 +39,7 @@ async function chooseManagerTool(){
 }
 
 async function run(){
+  // 选择版本 ['antd','element','eapp','vant']
   const type = types.includes(argv.t) ? argv.t : await chooseType()
   tool = tools.includes(argv.u) ? argv.u : await chooseManagerTool()
   console.log('正在安装环境依赖')

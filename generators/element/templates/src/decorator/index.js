@@ -5,7 +5,7 @@ import { MessageBox } from 'element-ui'
  * @param {String | Object} message 需要提示用户的信息 或者 confirm 的配置
  * @param {Function} errorFn 请求异常的回调 返回this 使用function 则为你绑定
  */
-export function confirm (message, errorFn) {
+export function confirm (message, errorFn = Function.prototype) {
   const defaultConf = {
     confirmButtonText: '确定',
     cancelButtonText: '取消',

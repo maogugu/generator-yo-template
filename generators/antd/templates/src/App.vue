@@ -16,11 +16,8 @@ export default {
     return {
       configProvider: {
         locale: zhCN,
-        renderEmpty: () => {
-          return <no-data/>
-        }
+        renderEmpty: () => <no-data/>
       }
-
     }
   }
 }

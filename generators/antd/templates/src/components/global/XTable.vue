@@ -21,7 +21,7 @@ export default {
      */
     pageNum: {
       type: String,
-      default: 'pageNum'
+      default: 'currPage'
     },
     /**
      * pageSize 重命名
@@ -43,6 +43,13 @@ export default {
     sortType: {
       type: String,
       default: 'sortType'
+    },
+    /**
+     * 分页是否between显示
+     */
+    betweenPagination: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -70,7 +77,7 @@ export default {
       }
     }
   },
-  created () {
+  mounted () {
     // 是否执行初始化
     if (this.init) {
       this.$emit('getData')
@@ -141,6 +148,7 @@ export default {
     })
     return (
       <a-table
+        class={this.betweenPagination ? 'between-pagination' : ''}
         props={props}
         on={on}
         scopedSlots={ this.$scopedSlots }
@@ -152,4 +160,13 @@ export default {
 }
 </script>
 <style scoped lang="less">
+.between-pagination /deep/ .ant-table-pagination.ant-pagination{
+  display: flex;
+  width: 100%;
+  float: none;
+}
+.between-pagination /deep/ .ant-pagination-total-text{
+  flex:1;
+  color:rgba(0, 0, 0, .45)
+}
 </style>

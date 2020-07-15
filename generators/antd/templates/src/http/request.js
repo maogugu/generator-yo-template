@@ -2,11 +2,34 @@ import axios from 'axios'
 import { session } from '@/utils'
 import { ErrorMessage } from '@/utils/antdvUtils'
 import jsFileDownload from 'js-file-download'
-import router from '@/router'
-
+import vm from '@/main'
 import Qs from 'qs'
+import { SESSIONID } from '@/utils/constant'
+import { Modal } from 'ant-design-vue'
+
+// 此函数 返回 将会把返回数据放到所有接口中! 适用于对所有请求添加同样参数的情况
+const getAllData = () => ({ })
+
 // 不走lodash cloneDeep 调用toJSON
 const JSONClone = obj => JSON.parse(JSON.stringify(obj))
+
+function reLogin () {
+  Modal.confirm({
+    title: '未登录',
+    icon: 'info-circle',
+    content: '登录已过期，是否重新登录?',
+    onOk () {
+      Modal.destroyAll()
+      session.destroy(SESSIONID)
+      const { hash, name, path, params, query } = vm.$route
+      session.setSession('backRoute', { hash, name, path, params, query })
+      vm.$router.push({ name: 'login' })
+    },
+    onCancel () {
+      Modal.destroyAll()
+    }
+  })
+}
 
 // http 说明表
 const ERROR_MSG = {
@@ -15,20 +38,21 @@ const ERROR_MSG = {
   403: '拒绝访问(403)',
   404: '请求出错(404)',
   408: '请求超时(408)',
+  429: '系统繁忙，请稍后重试(429)',
   502: '网络错误(502)',
   503: '服务不可用(503)',
   504: '网络超时(504)'
 }
 
 const http = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '' : `${window.location.origin}`
+  // 不使用baseUrl 以适应各种部署情况
   // timeout: 5000 不超时
 })
 
 http.interceptors.request.use(
   config => {
-    const token = session.getSession('token')
-    if (token) config.headers.token = token.replace(/"/g, '')
+    const sessionid = session.getSession(SESSIONID)
+    if (sessionid) config.headers[SESSIONID] = sessionid
     return config
   },
   error => {
@@ -46,23 +70,21 @@ http.interceptors.response.use(
       globalError('接口调用失败')
       switch (res.errorCode) {
         case 401:
-        case 403:
-        case 405:
-        case '-3':
-          session.destroy('token')
-          router.push({ name: 'login', query: { from: window.this.$route.name, params: window.this.$route.query } })
-          break
+        case '401':
+          reLogin()
+          throw new Error('no login')
         default:
           break
       }
       throw new Error(JSON.stringify(res))
     }
-    return res.result
+    return res.data
   },
   error => {
     // http error
-    globalError(new Date(), 'err' + error) // for debug reject
-    ErrorMessage(ERROR_MSG[error?.response?.status] || `连接出错(${error.response.status})!`) // 消抖
+    globalError(new Date(), 'err' + error) // for debug
+    const status = error?.response?.status ?? 'unKnow'
+    ErrorMessage(status ? ERROR_MSG[status] ?? `连接出错(${status})!` : '未知错误!')
     throw new Error(JSON.stringify(error))
   }
 )
@@ -70,7 +92,7 @@ http.interceptors.response.use(
 export const get = url => {
   return (params = {}) => {
     return new Promise((resolve, reject) => {
-      http.get(url, { params: JSONClone(params), paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }) })
+      http.get(url, { params: JSONClone({ ...params, ...getAllData() }), paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }) })
         .then(resolve)
         .catch(reject)
     })
@@ -80,7 +102,7 @@ export const get = url => {
 export const post = url => {
   return (data = {}) => {
     return new Promise((resolve, reject) => {
-      http.post(url, data)
+      http.post(url, { ...data, ...getAllData() })
         .then(resolve)
         .catch(reject)
     })
@@ -91,7 +113,7 @@ export const form = url => {
   return (data = {}) => {
     return new Promise((resolve, reject) => {
       // 达到和直接post json 一样的效果 先调用 toJSON
-      http.post(url, Qs.stringify(JSONClone(data), { arrayFormat: 'repeat' }))
+      http.post(url, Qs.stringify(JSONClone({ ...data, ...getAllData() }), { arrayFormat: 'repeat' }))
         .then(resolve)
         .catch(reject)
     })
@@ -102,7 +124,7 @@ export const form = url => {
 export const temp = url => {
   return (params = {}) => {
     return new Promise((resolve, reject) => {
-      http.post(url, {}, { params })
+      http.post(url, {}, { params: { ...params, ...getAllData() } })
         .then(resolve)
         .catch(reject)
     })
@@ -111,7 +133,7 @@ export const temp = url => {
 
 // post 二进制文件
 export const binary = url => {
-  return (objOrFile, cbProgress) => {
+  return (objOrFile, cbProgress = Function.prototype) => {
     const postForm = new FormData()
     if (Object.prototype.toString.call(objOrFile) === '[object Object]') { // 是对象 就序列化
       for (const key in objOrFile) {
@@ -122,28 +144,13 @@ export const binary = url => {
     } else { // 是文件就添加file头
       postForm.append('file', objOrFile) // 自定义名称
     }
+    const allDataObj = getAllData()
+    Object.keys(allDataObj).forEach(key => {
+      postForm.append(key, allDataObj[key])
+    })
     return new Promise((resolve, reject) => {
       http.post(url, postForm, {
         headers: { 'Content-Type': 'multipart/form-data;', 'X-Requested-With': '' },
-        onUploadProgress: ({ loaded, total }) => {
-          // 进度条实现
-          cbProgress({ percent: Math.round((loaded / total) * 100) - 10 }) // 上传完成为90
-        }
-      })
-        .then(res => {
-          cbProgress({ percent: 100 }) // 后端返回为 100
-          resolve(res)
-        })
-        .catch(reject)
-    })
-  }
-}
-
-// put 二进制文件
-export const put = url => {
-  return (file, cbProgress) => {
-    return new Promise((resolve, reject) => {
-      http.put(url, file, {
         onUploadProgress: ({ loaded, total }) => {
           // 进度条实现
           cbProgress({ percent: Math.round((loaded / total) * 100) - 10 }) // 上传完成为90
@@ -169,11 +176,11 @@ export const download = url => {
       {
         url,
         method: 'GET',
-        params: JSONClone(params),
+        params: JSONClone({ ...params, ...getAllData() }),
         paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }),
         responseType: 'blob',
         headers: {
-          token: session.getSession('token').replace(/"/g, '')
+          [SESSIONID]: session.getSession(SESSIONID)
         }
       }
     ).then(res => {

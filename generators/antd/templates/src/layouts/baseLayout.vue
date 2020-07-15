@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'DemoLayout',
+  name: 'BaseLayout',
   data () {
     return {
     }

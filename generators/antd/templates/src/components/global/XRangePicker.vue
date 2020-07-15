@@ -20,14 +20,9 @@ export default {
         return ['', '']
       },
       set (dates) {
-        if (dates.length === 0) {
-          this.$emit('update:start', '')
-          this.$emit('update:end', '')
-        } else {
-          const [start, end] = dates
-          this.$emit('update:start', start)
-          this.$emit('update:end', end)
-        }
+        const [start = '', end = ''] = dates
+        this.$emit('update:start', start)
+        this.$emit('update:end', end)
       }
     }
   },

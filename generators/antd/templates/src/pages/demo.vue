@@ -71,10 +71,10 @@
 </template>
 
 <script>
-import { uniqueId, random } from 'lodash-es'
+import { uniqueId, random } from 'lodash'
 import { loading, debounceFnStart } from '@/decorator'
 import { getDictList } from '@/dicts'
-import { uuid } from '../utils'
+import { uuid } from '@/utils'
 
 function mockData ({ pageSize }) {
   return new Promise((resolve, reject) => {

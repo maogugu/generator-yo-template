@@ -4,7 +4,6 @@ import {
   binary, // post 上传文件 (二进制文件)
   form, // post 表单
   temp, // 临时post 拼接URL
-  put, // 上传文件
   download // 下载文件
 } from '@/http/request'
 
@@ -16,7 +15,9 @@ export default {
   demoBinary: binary('isDemo/binaryApi'),
   demoForm: form('isDemo/formApi'),
   demoTemp: temp('isDemo/tempApi'),
-  demoPut: put('isDemo/tempApi'),
-  demoDownload: download('isDemo/tempApi')
+  demoDownload: download('isDemo/tempApi'),
+  /* demo -- end */
+  /* demo -- start */
+  login: form('/api/auth/login')
   /* demo -- end */
 }

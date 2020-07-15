@@ -47,7 +47,7 @@
   "vetur.validation.script": false,
   "emmet.triggerExpansionOnTab": true,
   // 配置css 代码提示 减少内存使用 提示 src snippets public 三个目录下 所有 css less 文件
-  "html-css-class-completion.includeGlobPattern": "{src,snippets,public}/**/*.{css,less}",
+  "html-css-class-completion.includeGlobPattern": "{src,snippets,public}/**/*.{css}",
   // 不提示 antd.min.css
   "html-css-class-completion.excludeGlobPattern": "public/css/antd.min.css",
   "html-css-class-completion.enableEmmetSupport": true,

@@ -1,8 +1,14 @@
 import Vue from 'vue'
+import moment from 'moment'
 
-/* 格式化金额 */
-export const moneyFormat = (money) => {
-  return money ? `${(money / 100).toFixed(2)}` : ''
-}
+export const YYYY_MM_DD = _ => moment(_).format('YYYY-MM-DD')
+Vue.filter('YYYY_MM_DD', YYYY_MM_DD)
 
-Vue.filter('moneyFormat', moneyFormat)
+export const YYYY_MM_DD_HH_MM = _ => moment(_).format('YYYY-MM-DD HH:mm')
+Vue.filter('YYYY_MM_DD_HH_MM', YYYY_MM_DD_HH_MM)
+
+export const YYYY_MM_DD_HH_MM_SS = _ => moment(_).format('YYYY-MM-DD HH:mm:ss')
+Vue.filter('YYYY_MM_DD_HH_MM_SS', YYYY_MM_DD_HH_MM_SS)
+
+export const HH_MM_SS = _ => moment(_).format('HH:mm:ss')
+Vue.filter('HH_MM_SS', HH_MM_SS)

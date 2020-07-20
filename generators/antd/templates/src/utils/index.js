@@ -21,7 +21,7 @@ export function uuid () {
  */
 export const session = {
   getSession (key) {
-    const { value } = JSON.parse(sessionStorage.getItem(key))
+    const { value = null } = JSON.parse(sessionStorage.getItem(key)) ?? {}
     return value
   },
   setSession (key, value) {

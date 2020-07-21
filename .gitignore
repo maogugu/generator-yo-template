@@ -304,4 +304,4 @@ $RECYCLE.BIN/
 *.catWebpackConfig*
 
 # 自动样式库
-src/style/auto.css
+auto.css

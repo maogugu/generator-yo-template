@@ -129,7 +129,7 @@ export default {
      * @public
      */
     setPageNum (num) {
-      this.paginationConfig.pageNum = num
+      this.paginationConfig.current = num
       this.$emit('getData')
     },
     /**
@@ -137,7 +137,7 @@ export default {
      * @public
      */
     setPageSize (num) {
-      this.paginationConfig.current = num
+      this.paginationConfig.pageSize = num
       this.$emit('getData')
     },
     /**

@@ -41,11 +41,18 @@ export const session = {
 // LocalStorage
 export const localSession = {
   getLocal (key) {
-    return JSON.parse(localStorage.getItem(key))
+    const { value = null } = JSON.parse(localStorage.getItem(key)) ?? {}
+    return value
   },
 
   setLocal (key, value) {
-    localStorage.setItem(key, JSON.stringify(value))
+    if (value === null || value === undefined) {
+      throw new Error('不允许传入 null 或 undefined')
+    }
+    if (typeof value === 'function') {
+      throw new Error('不允许传入 函数')
+    }
+    localStorage.setItem(key, JSON.stringify({ value }))
   },
 
   destroy (key) {

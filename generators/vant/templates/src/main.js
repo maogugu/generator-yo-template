@@ -8,7 +8,7 @@ import '@/filter/'
 // 全局组件
 import '@/components/global/globalComponent.js'
 // 动画库
-import '@/style/animate.css'
+// import '@/style/animate.css'
 // 样式库
 import '@/style/css/auto.css'
 // 样式重写
@@ -27,8 +27,10 @@ Vue.prototype.$apis = apis
 moment.locale('zh-cn')
 moment.fn.toJSON = function () { return this.format('YYYY-MM-DD') }
 
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+export default vm

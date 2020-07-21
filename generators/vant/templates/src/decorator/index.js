@@ -1,4 +1,4 @@
-import { debounce as _debounce, throttle as _throttle, isString } from 'lodash-es'
+import { debounce as _debounce, throttle as _throttle, isString } from 'lodash'
 import { Dialog, Toast } from 'vant'
 
 /**
@@ -6,7 +6,7 @@ import { Dialog, Toast } from 'vant'
  * @param {String | Object} message 需要提示用户的信息 或者 confirm 的配置
  * @param {Function} errorFn 请求异常的回调 返回this 使用function 则为你绑定
  */
-export function confirm (message, errorFn) {
+export function confirm (message, errorFn = Function.prototype) {
   let config = {}
   isString(message) // 如果是字符串  那么只添加message
     ? config.message = message
@@ -41,7 +41,7 @@ export function confirm (message, errorFn) {
  *  this.table =  this.$apis.demo()
  * }
  */
-export function loading (loading, errorCb) {
+export function loading (loading, errorCb = Function.prototype) {
   return function (target, name, descriptor) {
     const oldFn = descriptor.value
     descriptor.value = async function (...args) {
@@ -64,7 +64,7 @@ export function loading (loading, errorCb) {
  * @param {String} 提示消息
  * @param {Function} errorCb
  */
-export function toastLoading (message = '加载中...', errorCb) {
+export function toastLoading (message = '加载中...', errorCb = Function.prototype) {
   return function (target, name, descriptor) {
     const oldFn = descriptor.value
     descriptor.value = async function (...args) {

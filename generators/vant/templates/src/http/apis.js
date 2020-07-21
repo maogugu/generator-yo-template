@@ -3,8 +3,7 @@ import {
   post,
   binary, // post 上传文件 (二进制文件)
   form, // post 表单
-  temp, // 临时post 拼接URL
-  put // 上传文件
+  temp // 临时post 拼接URL
 } from '@/http/request'
 
 export default {
@@ -15,7 +14,6 @@ export default {
   demoPost: post('isDemo/postApi'),
   demoBinary: binary('isDemo/binaryApi'),
   demoForm: form('isDemo/formApi'),
-  demoTemp: temp('isDemo/tempApi'),
-  demoPut: put('isDemo/tempApi')
+  demoTemp: temp('isDemo/tempApi')
   /* demo -- end */
 }

@@ -16,8 +16,8 @@
         <i class="el-icon-location" />
         <span>全屏layout</span>
       </template>
-      <el-menu-item index="/base/home">base_home</el-menu-item>
-      <el-menu-item index="/base/home2">base_home2</el-menu-item>
+      <el-menu-item index="/base/demo">base_demo</el-menu-item>
+      <el-menu-item index="/base/demo2">base_demo2</el-menu-item>
       <el-menu-item index="/base/login">login</el-menu-item>
     </el-submenu>
     <el-submenu index="manager">
@@ -25,8 +25,8 @@
         <i class="el-icon-location" />
         <span>管理平台layout</span>
       </template>
-      <el-menu-item index="/manager/home">manager_home</el-menu-item>
-      <el-menu-item index="/manager/home2">manager_home2</el-menu-item>
+      <el-menu-item index="/manager/demo">manager_demo</el-menu-item>
+      <el-menu-item index="/manager/demo2">manager_demo2</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

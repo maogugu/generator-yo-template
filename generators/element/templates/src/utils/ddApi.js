@@ -1,8 +1,12 @@
 import * as dd from 'dingtalk-jsapi'
+import { CORP_ID } from '@/constants'
 import { session } from '@/utils'
 
 const baseConfig = () => ({
-  corpId: session.getSession('corpId'),
+
+  corpId: process.env.NODE_ENV === 'development'
+    ? process.env.VUE_APP_agentId
+    : session.getSession(CORP_ID),
   appId: process.env.VUE_APP_agentId
 })
 
@@ -29,12 +33,14 @@ export function setTitle (config) {
  */
 export function ddConfig (config) {
   return dd.config({
-    ...baseConfig(),
     ...config,
+    ...baseConfig(),
     jsApiList: [
       'biz.contact.choose',
       'biz.contact.complexPicker',
       'biz.contact.departmentsPicker',
+      'biz.customContact.choose',
+      'biz.customContact.multipleChoose',
       'biz.ding.post',
       'biz.util.openLink',
       'device.notification.alert',
@@ -51,9 +57,27 @@ export function ddConfig (config) {
 export function utilScan (config) {
   return dd.biz.util.scan({ ...baseConfig(), ...config })
 }
-// https://ding-doc.dingtalk.com/doc#/dev/oawo7q/5888bb96
-export function complexPicker (config) {
-  return dd.biz.contact.complexPicker({ ...baseConfig(), ...config })
+export async function complexPicker (config) {
+  /**
+   * mac端这个点击取消的触发是已知的，目前是需要开发者麻烦跟进返回的信息，如果都是空值，使用对返回信息做个判断，来走自己的取消后的逻辑，暂时麻烦开发者不走onfail回调判断取消
+   * 工单原话
+   */
+  const res = await dd.biz.contact.complexPicker({ ...baseConfig(), ...config })
+  if (res.users.length === 0 && res.departments.length === 0) {
+    throw new Error('没有选择')
+  }
+  return res
+}
+
+export async function multipleChoose (config) {
+  const res = await dd.biz.customContact.multipleChoose({ ...baseConfig(), ...config })
+  if (res.length === 0) {
+    throw new Error('没有选择')
+  }
+  return res
+}
+export function choose (config) {
+  return dd.biz.customContact.choose({ ...baseConfig(), ...config })
 }
 
 // 图片预览
@@ -123,6 +147,8 @@ export default {
   setTitle,
   utilScan,
   complexPicker,
+  multipleChoose,
+  choose,
   previewImage,
   getGeolocation,
   openLink,

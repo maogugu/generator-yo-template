@@ -7,6 +7,7 @@
 <script>
 import { SuccessMessage } from '@/utils/elementUtils'
 import { session, uuid } from '@/utils'
+import { SESSIONID } from '@/constants'
 
 export default {
   data () {
@@ -22,9 +23,9 @@ export default {
   },
   methods: {
     async login () {
-      session.setSession('token', uuid())
+      session.setSession(SESSIONID, uuid())
       SuccessMessage('模拟登录 login.vue line:26')
-      this.$router.push({ name: 'manager_home' })
+      this.$router.push({ name: 'demo' })
     }
 
   }

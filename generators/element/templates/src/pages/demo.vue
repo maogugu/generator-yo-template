@@ -11,56 +11,29 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="getTableData">查询</el-button>
+        <el-button type="primary" @click="search">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-table
+    <x-table
+      ref="table"
       v-loading="loadingTable"
       border
+      hide-on-single-page
       :data="tableData"
-      style="width: 100%"
+      @getData="getTableData"
     >
       <el-table-column v-for="item of cols" :key="item.id" v-bind="item" />
-      <!--<el-table-column-->
-      <!--prop="key"-->
-      <!--label="日期"-->
-      <!--width="180"-->
-      <!--/>-->
-      <!--<el-table-column-->
-      <!--prop="name"-->
-      <!--label="日期"-->
-      <!--width="180"-->
-      <!--/>-->
-      <!--<el-table-column-->
-      <!--prop="age"-->
-      <!--label="姓名"-->
-      <!--width="180"-->
-      <!--/>-->
-      <!--<el-table-column-->
-      <!--prop="address"-->
-      <!--label="地址"-->
-      <!--/>-->
-    </el-table>
-    <el-pagination
-      class="text-right m-t-16"
-      :current-page.sync="pages.pageNum"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size.sync="pages.pageSize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="400"
-      @size-change="sizeChange"
-      @current-change="getTableData"
-    />
+    </x-table>
   </div>
 </template>
 
 <script>
-import { uniqueId, random } from 'lodash-es'
+import { uniqueId, random } from 'lodash'
 import { loading, debounceFnStart } from '@/decorator'
 import { getDictList } from '@/dicts'
-import { uuid } from '../utils'
+import { uuid } from '@/utils'
 
-function mockData (pageSize) {
+function mockData ({ pageSize }) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(new Array(pageSize).fill(1).map(x => ({
@@ -78,10 +51,6 @@ export default {
   name: 'Home',
   data () {
     return {
-      pages: {
-        pageSize: 10,
-        pageNum: 1
-      },
       formInline: {
         user: '',
         region: ''
@@ -98,33 +67,26 @@ export default {
       ],
       loadingTable: false,
       tableData: []
-      // pagination: paginTool(this.getTableData.bind(this))
     }
   },
   created () {
     console.log('获取字典', getDictList('type'))
-    this.getTableData()
   },
   methods: {
+    search () {
+      this.$refs.table.search()
+    },
     @debounceFnStart()
     @loading('loadingTable')
     async getTableData () {
-      // const formValues = await this.form.validateFields()
-      // const params = { ...formValues, ...this.pagination.getValues() }
-      // console.log('传给后端的数据', JSON.stringify(params, null, '\t'))
-      console.log(JSON.stringify(this.formInline, null, 4))
-      console.log(JSON.stringify(this.pages, null, 2))
-
-      this.tableData = await mockData(10)
-      // this.pagination.setTotal(200)
+      const params = { ...this.formInline, ...this.$refs.table.getValues() }
+      console.log('传给后端的数据', JSON.stringify(params, null, '\t'))
+      this.tableData = await mockData(params)
+      this.$refs.table.setTotal(11)
     },
     resetTable () {
       this.form.resetFields()
-      this.pagination.initData()
-    },
-    sizeChange () {
-      this.pages.pageNum = 1
-      this.getTableData()
+      this.$refs.table.reset()
     }
   }
 }

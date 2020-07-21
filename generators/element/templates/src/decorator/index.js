@@ -1,4 +1,4 @@
-import { debounce as _debounce, throttle as _throttle, isString } from 'lodash-es'
+import { debounce as _debounce, throttle as _throttle, isString } from 'lodash'
 import { MessageBox } from 'element-ui'
 /**
  * 提示装饰器
@@ -11,35 +11,17 @@ export function confirm (message, errorFn = Function.prototype) {
     cancelButtonText: '取消',
     type: 'warning'
   }
+  const config = isString(message) ? { ...defaultConf, title: message } : { ...defaultConf, ...message }
   return function (target, name, descriptor) {
     const oldFn = descriptor.value
     descriptor.value = function (...args) {
-      MessageBox.confirm(Object.assign(
-        defaultConf,
-        isString(message) ? { title: message } : message // if use string then create Object else use Object to assign
-      )).then(() => {
-        oldFn.apply(this, args)
-      }).catch(() => {
+      MessageBox.confirm(config)
+        .then(oldFn.bind(this, ...args))
+        .catch(() => {
         // 无论如何都提示
-        globalWarn(`用户点击了取消:${name}`)
-        if (errorFn) {
+          globalWarn(`用户点击了取消:${name}`)
           errorFn.call(this, this)
-        }
-      })
-      // MessageBox.confirm(Object.assign(
-      //   defaultConf,
-      //   isString(message) ? { title: message } : message, // if use string then create Object else use Object to assign
-      //   {
-      //     onOk: () => oldFn.apply(this, args),
-      //     onCancel: () => {
-      //       // 无论如何都提示
-      //       globalWarn(`用户点击了取消:${name}`)
-      //       if (errorFn) {
-      //         errorFn.call(this, this)
-      //       }
-      //     }
-      //   }
-      // ))
+        })
     }
   }
 }
@@ -59,7 +41,7 @@ export function confirm (message, errorFn = Function.prototype) {
  *  this.table =  this.$apis.demo()
  * }
  */
-export function loading (loading, errorCb) {
+export function loading (loading, errorCb = Function.prototype) {
   return function (target, name, descriptor) {
     const oldFn = descriptor.value
     descriptor.value = async function (...args) {

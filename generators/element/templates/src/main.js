@@ -13,7 +13,7 @@ import '@/plugins/element'
 // 引入 moment
 import '@/plugins/moment'
 // 动画库
-import '@/style/animate.css'
+// import '@/style/animate.css'
 // 样式重写
 import '@/style/reset.css'
 // 自动生成样式库
@@ -24,8 +24,10 @@ Vue.config.productionTip = false
 // 原型链挂载
 Vue.prototype.$apis = apis
 
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+export default vm

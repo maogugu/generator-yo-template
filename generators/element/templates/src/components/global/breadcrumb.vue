@@ -3,10 +3,10 @@
     <div class="c-breadcrumb-head-box">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item v-for="(item,index) in $route.meta.breadcrumb" :key="index" :to="{name: item.name}">{{ item.title }}</el-breadcrumb-item>
-        <el-breadcrumb-item>{{ route.meta.title }}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ $route.meta.title }}</el-breadcrumb-item>
       </el-breadcrumb>
       <p>
-        {{ route.meta.title }}
+        {{ $route.meta.title }}
       </p>
     </div>
   </div>

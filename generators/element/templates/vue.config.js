@@ -1,7 +1,6 @@
 const path = require('path')
 const CssGeneratorPlugin = require('css-generator-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const PUBLIC_PATH = process.env.VUE_APP_PUBLIC_PATH
 const LogInfo = require('log-info-webpack-plugin')
 const importAssetsFromCdn = require('import-assets-from-cdn')
 const { version } = require('./package.json')
@@ -16,8 +15,6 @@ const externals = {
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
   axios: 'axios',
-  'lodash-es': '_',
-  lodash: '_',
   moment: 'moment',
   'dingtalk-jsapi': 'dd',
   'element-ui': 'ELEMENT'
@@ -28,14 +25,13 @@ const cdn = { // 将会注入index.html js 顺序不可乱 注意版本
     'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.1/theme-chalk/index.css'
   ],
   js: [
-    'https://g.alicdn.com/dingding/dingtalk-jsapi/2.8.33/dingtalk.open.js',
+    'https://g.alicdn.com/dingding/dingtalk-jsapi/2.11.10/dingtalk.open.js',
     'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/vue.min.js',
     'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/vue-router.min.js',
     'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/vuex.min.js',
     'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/axios.min.js',
     'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/moment.min.js',
     'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/moment-zh-cn.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/lodash.min.js',
     'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.1/index.js'
   ]
 }
@@ -47,16 +43,18 @@ module.exports = {
     port: 8080, // 端口号
     https: false, // https:{type:Boolean}
     open: false, // 配置自动启动浏览器
-    disableHostCheck: true // 解决127.0.0.1指向其他域名时出现"Invalid Host header"问题
-    // proxy: {
-    //   '/bscnym': {
-    //     target: 'http://172.17.9.148:8000',
-    //     changOrigin: true,
-    //     pathRewrite: { '^/': '/' }
-    //   }
-    // }
+    disableHostCheck: true,
+    proxy: {
+      '/api': {
+        target: 'http://xxx:8000',
+        changOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    }
   },
-  publicPath: PUBLIC_PATH,
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
   outputDir: 'dist', // 项目名
   lintOnSave: true, // 编译警告
   // auto fix eslint
@@ -66,9 +64,7 @@ module.exports = {
       .use(importAssetsFromCdn, [cdn])
       .end()
       .plugin('LogInfo')
-      .use(LogInfo, [{
-        version
-      }])
+      .use(LogInfo, [{ version }])
       .end()
       .plugin('CssGeneratorPlugin')
       .use(CssGeneratorPlugin, [{
@@ -111,10 +107,6 @@ module.exports = {
             return args
           })
           config
-            // 以下是打包依赖分析 push 请关闭 请只在本地使用
-            // .plugin('webpack-bundle-analyzer')
-            // .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-            // .end()
             .plugin('CompressionPlugin')
             .use(CompressionPlugin)
             .end()

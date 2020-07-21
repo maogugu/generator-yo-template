@@ -16,7 +16,7 @@ const routes = [
   { // base 下没有任何 外部layout
     path: '/base',
     name: 'base',
-    redirect: { name: 'base_home' },
+    redirect: { name: 'base_demo' },
     component: baseLayout,
     children: [
       {
@@ -26,15 +26,15 @@ const routes = [
         meta: { title: '登录', public: true }
       },
       {
-        path: 'home',
-        name: 'base_home',
-        component: () => import('@/pages/home'),
+        path: 'demo',
+        name: 'base_demo',
+        component: () => import('@/pages/demo'),
         meta: { title: '首页' }
       },
       {
-        path: 'home2',
-        name: 'base_home2',
-        component: () => import('@/pages/home'),
+        path: 'demo2',
+        name: 'base_demo2',
+        component: () => import('@/pages/demo'),
         meta: { title: '首页' }
       }
     ]
@@ -42,20 +42,20 @@ const routes = [
   { // manager 下 有默认layout
     path: '/manager',
     name: 'manager',
-    redirect: { name: 'manager_home' },
+    redirect: { name: 'manager_demo' },
     component: managerLayout,
     children: [
       {
-        path: 'home',
-        name: 'manager_home',
-        component: () => import('@/pages/home'),
+        path: 'demo',
+        name: 'manager_demo',
+        component: () => import('@/pages/demo'),
         meta: { title: '首页' }
       },
       {
-        path: 'home2',
-        name: 'manager_home2',
-        component: () => import('@/pages/home'),
-        meta: { title: '详情页面', breadcrumb: [{ name: 'manager_home', title: '首页' }] }
+        path: 'demo2',
+        name: 'manager_demo2',
+        component: () => import('@/pages/demo'),
+        meta: { title: '详情页面', breadcrumb: [{ name: 'manager_demo', title: '首页' }] }
       }
     ]
   }

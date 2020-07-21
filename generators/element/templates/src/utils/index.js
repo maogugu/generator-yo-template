@@ -1,4 +1,4 @@
-import { isFunction } from 'lodash-es'
+import { isFunction } from 'lodash'
 
 /**
  * 生成唯一标识
@@ -15,13 +15,23 @@ export function uuid () {
   })
 }
 
-// SessionStorage
+/**
+ * SessionStorage
+ * 传入什么 就返回什么
+ */
 export const session = {
   getSession (key) {
-    return JSON.parse(sessionStorage.getItem(key))
+    const { value = null } = JSON.parse(sessionStorage.getItem(key)) ?? {}
+    return value
   },
   setSession (key, value) {
-    sessionStorage.setItem(key, JSON.stringify(value))
+    if (value === null || value === undefined) {
+      throw new Error('不允许传入 null 或 undefined')
+    }
+    if (typeof value === 'function') {
+      throw new Error('不允许传入 函数')
+    }
+    sessionStorage.setItem(key, JSON.stringify({ value }))
   },
   destroy (key) {
     sessionStorage.removeItem(key)
@@ -31,11 +41,18 @@ export const session = {
 // LocalStorage
 export const localSession = {
   getLocal (key) {
-    return JSON.parse(localStorage.getItem(key))
+    const { value = null } = JSON.parse(localStorage.getItem(key)) ?? {}
+    return value
   },
 
   setLocal (key, value) {
-    localStorage.setItem(key, JSON.stringify(value))
+    if (value === null || value === undefined) {
+      throw new Error('不允许传入 null 或 undefined')
+    }
+    if (typeof value === 'function') {
+      throw new Error('不允许传入 函数')
+    }
+    localStorage.setItem(key, JSON.stringify({ value }))
   },
 
   destroy (key) {

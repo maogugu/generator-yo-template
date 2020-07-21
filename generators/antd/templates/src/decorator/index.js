@@ -12,23 +12,21 @@ export function confirm (message, errorFn = Function.prototype) {
     okType: 'danger',
     maskClosable: false
   }
+  const config = isString(message) ? { ...defaultConf, title: message } : { ...defaultConf, ...message }
   return function (target, name, descriptor) {
     const oldFn = descriptor.value
     descriptor.value = function (...args) {
-      Modal.confirm(Object.assign(
-        defaultConf,
-        isString(message) ? { title: message } : message, // if use string then create Object else use Object to assign
-        {
-          onOk: () => oldFn.apply(this, args),
-          onCancel: () => {
-            // 无论如何都提示
-            globalWarn(`用户点击了取消:${name}`)
-            if (errorFn) {
-              errorFn.call(this, this)
-            }
+      Modal.confirm({
+        ...config,
+        onOk: oldFn.bind(this, ...args),
+        onCancel: () => {
+          // 无论如何都提示
+          globalWarn(`用户点击了取消:${name}`)
+          if (errorFn) {
+            errorFn.call(this, this)
           }
         }
-      ))
+      })
     }
   }
 }

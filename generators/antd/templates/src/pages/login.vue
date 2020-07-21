@@ -7,7 +7,7 @@
 <script>
 import { SuccessMessage } from '@/utils/antdvUtils'
 import { session, uuid } from '@/utils'
-import { SESSIONID, BACK_ROUTE, USER_INFO } from '@/utils/constant'
+import { SESSIONID, BACK_ROUTE, USER_INFO } from '@/constants'
 import { requestAuthCodeForRuntime } from '@/utils/ddApi'
 
 export default {

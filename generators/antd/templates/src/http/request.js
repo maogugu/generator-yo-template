@@ -4,7 +4,7 @@ import { ErrorMessage } from '@/utils/antdvUtils'
 import jsFileDownload from 'js-file-download'
 import vm from '@/main'
 import Qs from 'qs'
-import { SESSIONID } from '@/utils/constant'
+import { SESSIONID } from '@/constants'
 import { Modal } from 'ant-design-vue'
 
 // 此函数 返回 将会把返回数据放到所有接口中! 适用于对所有请求添加同样参数的情况
@@ -90,44 +90,28 @@ http.interceptors.response.use(
 )
 // get 方法 也调用一次 toJSON
 export const get = url => {
-  return (params = {}) => {
-    return new Promise((resolve, reject) => {
-      http.get(url, { params: JSONClone({ ...params, ...getAllData() }), paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }) })
-        .then(resolve)
-        .catch(reject)
-    })
+  return async (params = {}) => {
+    return await http.get(url, { params: JSONClone({ ...params, ...getAllData() }), paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }) })
   }
 }
 // post JSON 默认调用 toJSON
 export const post = url => {
-  return (data = {}) => {
-    return new Promise((resolve, reject) => {
-      http.post(url, { ...data, ...getAllData() })
-        .then(resolve)
-        .catch(reject)
-    })
+  return async (data = {}) => {
+    return await http.post(url, { ...data, ...getAllData() })
   }
 }
 // post 表单 手动 toJSON
 export const form = url => {
-  return (data = {}) => {
-    return new Promise((resolve, reject) => {
-      // 达到和直接post json 一样的效果 先调用 toJSON
-      http.post(url, Qs.stringify(JSONClone({ ...data, ...getAllData() }), { arrayFormat: 'repeat' }))
-        .then(resolve)
-        .catch(reject)
-    })
+  return async (data = {}) => {
+    // 达到和直接post json 一样的效果 先调用 toJSON
+    return await http.post(url, Qs.stringify(JSONClone({ ...data, ...getAllData() }), { arrayFormat: 'repeat' }))
   }
 }
 // temp post 但是拼接URL 临时使用
 
 export const temp = url => {
-  return (params = {}) => {
-    return new Promise((resolve, reject) => {
-      http.post(url, {}, { params: { ...params, ...getAllData() } })
-        .then(resolve)
-        .catch(reject)
-    })
+  return async (params = {}) => {
+    return await http.post(url, {}, { params: { ...params, ...getAllData() } })
   }
 }
 

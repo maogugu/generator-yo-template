@@ -1,5 +1,5 @@
 import * as dd from 'dingtalk-jsapi'
-import { CORP_ID } from '@/utils/constant'
+import { CORP_ID } from '@/constants'
 import { session } from '@/utils'
 
 const baseConfig = () => ({

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import baseLayout from '@/layouts/baseLayout'
 import managerLayout from '@/layouts/managerLayout'
 import { session } from '@/utils'
-import { CORP_ID, SESSIONID } from '@/utils/constant'
+import { CORP_ID, SESSIONID } from '@/constants'
 
 /**
  * 路由尽量写成平级的 只与ui有关 与业务无关 便于复用

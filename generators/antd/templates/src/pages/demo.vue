@@ -1,5 +1,7 @@
 <template>
   <div class="home p-24">
+    <a-button @click="confirmA(1,2,3,4,5,6)">confirm string</a-button>
+    <a-button @click="confirmB">confirm object</a-button>
     <h3 class="c-link-80 border-1 border-y-1 border-c-red p-l-2rem">颜色在gloableColors.json 中配置</h3>
     <h3 class="c-link-80 m-x-30 m-t-1p">css将会根据 class 规则自动生成 如 m-x-30 m-t-10vw</h3>
     <a-form-model
@@ -49,7 +51,7 @@
         <a-date-picker v-model="form.ss5" class="w-17vw" />
       </a-form-model-item>
       <a-form-model-item>
-        <a-button type="primary" :loading="loadingTable" @click="getTableData">
+        <a-button type="primary" :loading="loadingTable" @click="search">
           查 询
         </a-button>
         <a-button :loading="loadingTable" @click="resetTable">
@@ -72,7 +74,7 @@
 
 <script>
 import { uniqueId, random } from 'lodash'
-import { loading, debounceFnStart } from '@/decorator'
+import { loading, debounceFnStart, confirm } from '@/decorator'
 import { getDictList } from '@/dicts'
 import { uuid } from '@/utils'
 
@@ -94,6 +96,7 @@ export default {
   name: 'Home',
   data () {
     return {
+      type: true,
       form: {
         ss1: '',
         ss2: '',
@@ -123,9 +126,22 @@ export default {
       this.tableData = await mockData(params)
       this.$refs.table.setTotal(200)
     },
+    search () {
+      this.$refs.table.search()
+      // 两个方法相同
+      // this.$refs.table.setPageSize(1)
+    },
     resetTable () {
       this.$refs.form.resetFields()
       this.$refs.table.reset()
+    },
+    @confirm('is string')
+    confirmA (...args) {
+      console.log(...args)
+    },
+    @confirm({ title: 'isObject', okType: 'primary' })
+    confirmB () {
+      this.type = !this.type
     }
   }
 }

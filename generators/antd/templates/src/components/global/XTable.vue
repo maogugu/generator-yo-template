@@ -115,7 +115,7 @@ export default {
      */
     reset () {
       this.paginationConfig.current = 1
-      this.paginationConfig.pageSize = 10
+      this.paginationConfig.pageSize = this.pagination?.pageSize ?? this.$options.data().paginationConfig.pageSize
       this.$emit('getData')
     },
     /**
@@ -123,6 +123,30 @@ export default {
      */
     setTotal (value) {
       this.paginationConfig.total = value
+    },
+    /**
+     * 设置 pageNum 触发 getData
+     * @public
+     */
+    setPageNum (num) {
+      this.paginationConfig.pageNum = num
+      this.$emit('getData')
+    },
+    /**
+     * 设置 pageSize 触发 getData
+     * @public
+     */
+    setPageSize (num) {
+      this.paginationConfig.current = num
+      this.$emit('getData')
+    },
+    /**
+     * 搜索 会将页面设置到第一页 触发 getData
+     * @public
+     */
+    search () {
+      this.paginationConfig.current = 1
+      this.$emit('getData')
     },
     /**
      * 返回重命名后的分页参数

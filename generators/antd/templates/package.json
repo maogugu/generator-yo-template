@@ -10,7 +10,6 @@
     "inspect:dev": "vue-cli-service inspect --mode dev > dev.catWebpackConfig.js"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.157",
     "ant-design-vue": "^1.6.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",

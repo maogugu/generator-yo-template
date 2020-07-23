@@ -57,7 +57,6 @@ http.interceptors.response.use(
       }
       globalError('接口调用失败')
       switch (res.errorCode) {
-        case 401:
         case '401':
           reLogin()
           throw new Error('no login')
@@ -78,28 +77,28 @@ http.interceptors.response.use(
 )
 // get 方法 也调用一次 toJSON
 export const get = url => {
-  return async (params = {}) => {
-    return await http.get(url, { params: JSONClone({ ...params, ...getAllData() }), paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }) })
+  return (params = {}) => {
+    return http.get(url, { params: JSONClone({ ...params, ...getAllData() }), paramsSerializer: x => Qs.stringify(x, { arrayFormat: 'repeat' }) })
   }
 }
 // post JSON 默认调用 toJSON
 export const post = url => {
-  return async (data = {}) => {
-    return await http.post(url, { ...data, ...getAllData() })
+  return (data = {}) => {
+    return http.post(url, { ...data, ...getAllData() })
   }
 }
 // post 表单 手动 toJSON
 export const form = url => {
-  return async (data = {}) => {
+  return (data = {}) => {
     // 达到和直接post json 一样的效果 先调用 toJSON
-    return await http.post(url, Qs.stringify(JSONClone({ ...data, ...getAllData() }), { arrayFormat: 'repeat' }))
+    return http.post(url, Qs.stringify(JSONClone({ ...data, ...getAllData() }), { arrayFormat: 'repeat' }))
   }
 }
 // temp post 但是拼接URL 临时使用
 
 export const temp = url => {
-  return async (params = {}) => {
-    return await http.post(url, {}, { params: { ...params, ...getAllData() } })
+  return (params = {}) => {
+    return http.post(url, {}, { params: { ...params, ...getAllData() } })
   }
 }
 

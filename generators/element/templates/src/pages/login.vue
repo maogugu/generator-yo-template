@@ -25,7 +25,7 @@ export default {
     async login () {
       session.setSession(SESSIONID, uuid())
       SuccessMessage('模拟登录 login.vue line:26')
-      this.$router.push({ name: 'demo' })
+      this.$router.push({ name: 'manager_demo' })
     }
 
   }

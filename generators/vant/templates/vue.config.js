@@ -34,7 +34,7 @@ module.exports = {
     https: false, // https:{type:Boolean}
     open: false, // 配置自动启动浏览器
     disableHostCheck: true, // 解决127.0.0.1指向其他域名时出现"Invalid Host header"问题
-    api: {
+    proxy: {
       '/api': {
         target: 'http://xxxx:8000',
         changOrigin: true,

@@ -3,7 +3,7 @@
     "dingtalk-jsapi": "^2.8.33"
   },
   "devDependencies": {
-    "css-generator-plugin": "^0.14.0",
+    "css-generator-plugin": "^0.16.0",
     "standard": "^14.3.4"
   },
   "scripts": {

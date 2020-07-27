@@ -305,3 +305,6 @@ $RECYCLE.BIN/
 
 # 自动样式库
 auto.css
+
+yarn.lock
+package-lock.json

@@ -22,17 +22,14 @@ const externals = {
 
 const cdn = { // 将会注入index.html js 顺序不可乱 注意版本
   css: [
-    'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.1/theme-chalk/index.css'
+    'https://cdn.jsdelivr.net/npm/element-ui@2.13.2/lib/theme-chalk/index.min.css'
   ],
   js: [
-    'https://g.alicdn.com/dingding/dingtalk-jsapi/2.11.10/dingtalk.open.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/vue.min.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/vue-router.min.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/vuex.min.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/axios.min.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/moment.min.js',
-    'https://xfw-bscnym-test.oss-cn-hangzhou.aliyuncs.com/static/js/moment-zh-cn.js',
-    'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.1/index.js'
+    'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js',
+    'https://cdn.jsdelivr.net/npm/vue-router@3/dist/vue-router.min.js',
+    'https://cdn.jsdelivr.net/npm/vuex@3/dist/vuex.min.js',
+    'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
+    'https://cdn.jsdelivr.net/npm/element-ui@2/lib/index.min.js'
   ]
 }
 

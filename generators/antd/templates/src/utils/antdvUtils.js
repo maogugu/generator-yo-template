@@ -1,24 +1,15 @@
 import { debounce } from 'lodash'
 import { PriceReg, emailReg, PhoneReg, MobileReg, IDReg, PositiveIntReg, limtInputReg } from '@/utils/validate'
 import { message } from 'ant-design-vue'
-
+const debounceConfig = [ 1500, { leading: true, trailing: false } ]
 // 成功提示
-export const SuccessMessage = debounce((msg) => { message.success(msg) }, 1500, {
-  leading: true,
-  trailing: false
-})
+export const SuccessMessage = debounce((msg) => { message.success(msg) },...debounceConfig)
 
 // 警告提示
-export const WarningMessage = debounce((msg) => { message.warning(msg) }, 1500, {
-  leading: true,
-  trailing: false
-})
+export const WarningMessage = debounce((msg) => { message.warning(msg) },...debounceConfig)
 
 // 失败提示
-export const ErrorMessage = debounce((msg) => { message.error(msg) }, 1500, {
-  leading: true,
-  trailing: false
-})
+export const ErrorMessage = debounce((msg) => { message.error(msg) },...debounceConfig)
 
 // 常见校验规则
 /**

@@ -21,7 +21,7 @@ export default {
      */
     pageNum: {
       type: String,
-      default: 'currPage'
+      default: 'pageNum'
     },
     /**
      * pageSize 重命名

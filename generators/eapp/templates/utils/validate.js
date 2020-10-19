@@ -50,7 +50,7 @@ export function isPrice (path) {
 /**
  *  正整数
  */
-export const PositiveIntReg = /^\d+$/
+export const PositiveIntReg = /^[1-9]\d*?$/
 export function isPositiveInt (path) {
   return PriceReg.test(path)
 }

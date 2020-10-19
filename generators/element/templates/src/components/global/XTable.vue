@@ -1,4 +1,5 @@
 <script>
+import { isFunction } from 'lodash'
 // 提交事件 重新获取数据
 export default {
   name: 'XTable',
@@ -153,7 +154,8 @@ export default {
     const props = { ...this.$attrs }
     // 对获取外部插槽
     const slots = Object.keys(this.$scopedSlots).map(slot => {
-      return (<template slot={slot}>{ this.$scopedSlots[slot] }</template>)
+      const vnode = this.$scopedSlots[slot]
+      return (<template slot={slot}>{ isFunction(vnode) ? vnode() : vnode  }</template>)
     })
     const paginationProps = { ...this.paginationConfig }
     const paginationOn = { 'size-change': this.sizeChange, 'current-change': this.currentChange }

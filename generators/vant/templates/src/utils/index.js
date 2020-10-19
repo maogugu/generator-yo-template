@@ -59,3 +59,30 @@ export const localSession = {
     localStorage.removeItem(key)
   }
 }
+
+export class Utils {
+  /**
+   * @param {Number} 休眠时间
+   */
+  static sleep (time) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, time)
+    })
+  }
+
+  /**
+   * 获取服务端时间
+   */
+  static getServerDate () {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.open('GET', '/', true)
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 3) {
+          resolve(Date(xhr.getResponseHeader('Date')))
+        }
+      }
+      xhr.send(null)
+    })
+  }
+}

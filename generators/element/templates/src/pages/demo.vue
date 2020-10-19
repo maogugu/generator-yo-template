@@ -85,7 +85,7 @@ export default {
       this.$refs.table.setTotal(11)
     },
     resetTable () {
-      this.form.resetFields()
+      this.form = this.$options.data().form
       this.$refs.table.reset()
     }
   }

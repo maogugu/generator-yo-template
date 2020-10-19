@@ -7,7 +7,9 @@ import {
   download // 下载文件
 } from '@/http/request'
 
-export default {
+import { omit } from 'lodash'
+
+const apis = {
   /* demo -- start */
   // 调用方式1（推荐使用）  this.$apis.demoGet({id: 1, sex: 2})
   demoGet: get('/isDemo/getApi'),
@@ -17,7 +19,15 @@ export default {
   demoTemp: temp('isDemo/tempApi'),
   demoDownload: download('isDemo/tempApi'),
   /* demo -- end */
-  /* demo -- start */
-  login: form('/api/auth/login')
-  /* demo -- end */
+  /* 公共 -- start */
+  getConfig: form('/api/auth/ddConfig'), // 鉴权
+  login: form('/api/auth/login'), // 登录
+  uploadFile: binary('/api/file/upload') // 登录
+  /* 公共 -- end */
 }
+
+apis.install = (Vue, options) => {
+  Vue.prototype.$apis = omit(apis, ['install'])
+}
+
+export default apis

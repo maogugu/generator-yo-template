@@ -1,15 +1,16 @@
-import { debounce } from 'lodash'
+import { debounce, isString } from 'lodash'
 import { PriceReg, emailReg, PhoneReg, MobileReg, IDReg, PositiveIntReg, limtInputReg } from '@/utils/validate'
-import { message } from 'ant-design-vue'
-const debounceConfig = [ 1500, { leading: true, trailing: false } ]
+import { message, Modal } from 'ant-design-vue'
+
+const debounceConfig = [1500, { leading: true, trailing: false }]
 // 成功提示
-export const SuccessMessage = debounce((msg) => { message.success(msg) },...debounceConfig)
+export const SuccessMessage = debounce((msg) => { message.success(msg) }, ...debounceConfig)
 
 // 警告提示
-export const WarningMessage = debounce((msg) => { message.warning(msg) },...debounceConfig)
+export const WarningMessage = debounce((msg) => { message.warning(msg) }, ...debounceConfig)
 
 // 失败提示
-export const ErrorMessage = debounce((msg) => { message.error(msg) },...debounceConfig)
+export const ErrorMessage = debounce((msg) => { message.error(msg) }, ...debounceConfig)
 
 // 常见校验规则
 /**
@@ -48,3 +49,21 @@ export const normalStr = (min = 0, max = 9999) => ({
   message: `请输入${min}~${max}个字符`
 })
 // 常见的格式化规则
+
+export class AntdUtils {
+  static confirm (option) {
+    const config = isString(option) ? { title: option } : option
+    const merageConfig = {
+      okType: 'danger',
+      maskClosable: false,
+      ...config
+    }
+    return new Promise((resolve, reject) => {
+      Modal.confirm({
+        ...merageConfig,
+        onOk: () => { resolve() },
+        onCancel: () => { reject(new Error('用户点击了取消')) }
+      })
+    })
+  }
+}

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="p-24 br-4">
     <div ref="richText" class="c-4cd3c2 h-300" />
-    <a-button type="primary" @click="getData">获取数据</a-button>
+    <a-button type="primary" class="m-t-8" @click="getData">获取数据</a-button>
   </div>
 </template>
 <script>

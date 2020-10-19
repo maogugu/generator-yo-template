@@ -24,8 +24,7 @@ import '@/style/css/reset.css'
 
 Vue.config.productionTip = false
 
-// 原型链挂载
-Vue.prototype.$apis = apis
+Vue.use(apis)
 
 const vm = new Vue({
   router,

@@ -26,6 +26,15 @@ declare const positiveIntRuler:antdRule
 /** 限制输入 min~max个汉字、字母、数字 中划线下划线 */
 declare function normalStr({min = 0, max = 9999}):antdRule 
 
+declare class AntdUtils {
+  constructor() {
+  }
+  /**
+   * 二次确认框
+   * @param option 配置 为 String or Object 具体配置看官网
+   */
+  static confirm(option:String | Object):Promise
+}
 
 
 export {
@@ -37,5 +46,6 @@ export {
   phoneRuler,
   idRuler,
   mobileRuler,
+  AntdUtils,
   positiveIntRuler
 }

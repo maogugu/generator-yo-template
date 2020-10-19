@@ -1,4 +1,5 @@
 <script>
+import { isFunction } from 'lodash'
 export default {
   name: 'XRangePicker',
   props: {
@@ -44,7 +45,8 @@ export default {
     const on = { ...this.$listeners, change: this.change }
     // 对获取外部插槽
     const slots = Object.keys(this.$scopedSlots).map(slot => {
-      return (<template slot={slot}>{ this.$scopedSlots[slot] }</template>)
+      const vnode = this.$scopedSlots[slot]
+      return (<template slot={slot}>{ isFunction(vnode) ? vnode() : vnode }</template>)
     })
     return (
       <a-range-picker

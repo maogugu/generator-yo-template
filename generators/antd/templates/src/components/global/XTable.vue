@@ -1,4 +1,5 @@
 <script>
+import { isFunction } from 'lodash'
 export default {
   name: 'XTable',
   props: {
@@ -168,7 +169,8 @@ export default {
     const props = { ...this.$attrs, pagination: this.paginationConfig }
     // 对获取外部插槽
     const slots = Object.keys(this.$scopedSlots).map(slot => {
-      return (<template slot={slot}>{ this.$scopedSlots[slot] }</template>)
+      const vnode = this.$scopedSlots[slot]
+      return (<template slot={slot}>{ isFunction(vnode) ? vnode() : vnode }</template>)
     })
     return (
       <a-table

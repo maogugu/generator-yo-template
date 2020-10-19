@@ -25,8 +25,24 @@ interface localSessionInterface{
 }
 
 declare var localSession:localSessionInterface
+
+declare class Utils {
+  constructor() {
+  }
+  /**
+   *  休眠时间
+   * @param {Number} waitTime
+   */
+  static sleep:Promise
+  /**
+  * 获取服务器时间 返回Date对象
+  */
+  static getServerDate:Promise<Date>
+}
+
 export {
   uuid,
   session,
-  localSession
+  localSession,
+  Utils
 }
